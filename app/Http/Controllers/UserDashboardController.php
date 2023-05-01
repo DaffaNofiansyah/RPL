@@ -8,7 +8,7 @@ class UserDashboardController extends Controller
 {
     public function index()
     {
-        return view('userdashboard.index',
+        return view('user.userdashboard.index',
         [
             'title' => 'User Dashboard',
             'active' => 'userdashboard'

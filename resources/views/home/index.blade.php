@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.homemain')
 
 
 @section('container')
@@ -8,10 +8,10 @@
 
     {{-- login as user and admin --}}
     <h2>
-        <a href="/userlogin">Login as User</a>
+        <a href="/user/login">Login as User</a>
     </h2>
     <h2>
-        <a href="/adminlogin">Login as Admin</a>
+        <a href="/admin/login">Login as Admin</a>
     </h2>
 
     @endsection

@@ -33,21 +33,56 @@ Route::get('/home', function () {
 
 //USER
 //userlogin
-Route::get('/userlogin', [UserLoginController::class, 'login'])->name('login')->middleware('guest');
-Route::post('/userlogin', [UserLoginController::class, 'authenticate']);
+
+
 //userlogout
-Route::post('/userlogout', [UserLoginController::class, 'logout'])->middleware('auth');
+
 //userregister
-Route::get('/userregister', [UserLoginController::class, 'register'])->middleware('guest');
+
 //userreq
-Route::resource('/user/req', UserController::class)->middleware('auth');
+
 //userdashboard
-Route::get('/user/dashboard', [UserDashboardController::class, 'index'])->middleware('auth');
+
 
 //adminlogin
-Route::get('/adminlogin', [AdminLoginController::class, 'login'])->middleware('guest');
 
-Route::resource('/user/board', UserBoardController::class);
+
+
+
+
+Route::prefix('user')->name('user.')->group(function () 
+{
+    Route::middleware('guest')->group(function () 
+    {
+        Route::get('/login', [UserLoginController::class, 'login'])->name('login');
+        Route::post('/login', [UserLoginController::class, 'authenticate']);
+        Route::get('/register', [UserLoginController::class, 'register']);
+    });
+
+
+    Route::middleware('auth')->group(function () 
+    {
+        Route::post('/logout', [UserLoginController::class, 'logout']);
+        Route::get('/dashboard', [UserDashboardController::class, 'index']);
+        Route::resource('/board', UserBoardController::class);
+        Route::resource('/req', UserController::class);
+        
+    });
+});
+
+
+Route::prefix('admin')->name('admin.')->group(function () 
+{
+    Route::middleware('guest')->group(function () 
+    {
+        Route::get('/login', [AdminLoginController::class, 'login'])->name('login');
+    });
+
+    Route::middleware('auth')->group(function () 
+    {
+
+    });
+});
 
 
 

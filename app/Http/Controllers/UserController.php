@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('userreq.index',
+        return view('user.userreq.index',
         [
             'title' => 'User Request',
             'active' => 'userreq',
@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('userreq.create',
+        return view('user.userreq.create',
         [
             'title' => 'User Request',
             'active' => 'userreq',
@@ -67,17 +67,34 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(Req $req)
     {
-        //
+        return view('user.userreq.edit',
+        [
+            'title' => 'User Request',
+            'active' => 'userreq',
+            'boards' => Board::all(),
+            'request' => $req
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Req $req)
     {
-        //
+        $validatedData = $request->validate([
+            'konten' => 'required',
+            'board_id' => 'required',
+            'detail' => 'required',
+            'deadline' => 'required'
+        ]);
+
+        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['status'] = 'pending';
+        Req::where('id', $req->id)->update($validatedData);
+
+        return redirect('/user/req')->with('editreq_success', 'Request has been edited!');
     }
 
     /**

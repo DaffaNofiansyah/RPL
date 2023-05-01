@@ -9,7 +9,7 @@ class UserLoginController extends Controller
 {
     public function login()
     {
-        return view('userlogin.login',
+        return view('user.userlogin.login',
         [
             'title' => 'User Login',
             'active' => 'userlogin'
@@ -18,7 +18,7 @@ class UserLoginController extends Controller
 
     public function register()
     {
-        return view('userlogin.register',
+        return view('user.userlogin.register',
         [
             'title' => 'User Register',
             'active' => 'userregister'

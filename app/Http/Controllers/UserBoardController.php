@@ -13,7 +13,7 @@ class UserBoardController extends Controller
      */
     public function index()
     {
-        return view('userboard.index',
+        return view('user.userboard.index',
             [
                 'boards' => Board::all()
             ]
@@ -41,7 +41,7 @@ class UserBoardController extends Controller
      */
     public function show(Board $board)
     {
-        return view('userboard.show',
+        return view('user.userboard.show',
             [
                 'board' => $board,
                 // 'requests is all the requests that has the same board_id as the board we are viewing
