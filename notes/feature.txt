@@ -1,2 +1,3 @@
 add people in charge
 add image for boards
+add notes for requests

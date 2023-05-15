@@ -1,13 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\BoardController;
-use App\Http\Controllers\UserBoardController;
-use App\Http\Controllers\UserLoginController;
-use App\Http\Controllers\AdminLoginController;
-use App\Http\Controllers\UserRegisterController;
-use App\Http\Controllers\UserDashboardController;
+
+use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminBoardController;
+
+
+//User Controllers
+use App\Http\Controllers\User\UserBoardController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\User\UserLoginController;
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +33,12 @@ use App\Http\Controllers\UserDashboardController;
 //home
 Route::get('/', function () {
     return view('home.index');
-});
+})->middleware('guest')->name('login');
 
 //home
 Route::get('/home', function () {
     return view('home.index');
-});
+})->middleware('guest')->name('login');
 
 
 //USER
@@ -50,40 +60,35 @@ Route::get('/home', function () {
 
 
 
-Route::prefix('user')->name('user.')->group(function () 
-{
-    Route::middleware('guest')->group(function () 
-    {
+Route::prefix('user')->name('user.')->group(function () {
+    Route::middleware('guest')->group(function () {
         Route::get('/login', [UserLoginController::class, 'login'])->name('login');
         Route::post('/login', [UserLoginController::class, 'authenticate']);
         Route::get('/register', [UserLoginController::class, 'register']);
     });
 
 
-    Route::middleware('auth')->group(function () 
-    {
+    Route::middleware('auth')->group(function () {
         Route::post('/logout', [UserLoginController::class, 'logout']);
         Route::get('/dashboard', [UserDashboardController::class, 'index']);
         Route::resource('/board', UserBoardController::class);
         Route::resource('/req', UserController::class);
-        
     });
 });
 
 
-Route::prefix('admin')->name('admin.')->group(function () 
-{
-    Route::middleware('guest')->group(function () 
-    {
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware('guest')->group(function () {
         Route::get('/login', [AdminLoginController::class, 'login'])->name('login');
+        Route::post('/login', [AdminLoginController::class, 'authenticate']);
     });
 
-    Route::middleware('auth')->group(function () 
-    {
-
+    
+    Route::middleware('auth:admin')->group(function () {
+        Route::post('/logout', [AdminLoginController::class, 'logout']);
+        Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+        Route::resource('/board', AdminBoardController::class);
+        Route::resource('/req', AdminController::class);
     });
 });
-
-
-
-

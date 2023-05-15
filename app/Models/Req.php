@@ -15,8 +15,8 @@ class Req extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function board()
+    public function PICs()
     {
-        return $this->belongsTo(Board::class);
+        return $this->hasMany(PIC::class);
     }
 }
