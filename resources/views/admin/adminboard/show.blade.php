@@ -2,34 +2,84 @@
 
 
 @section('container')
-    <table class="table table-striped table-sm">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Content Name </th>
-            <th scope="col">Status </th>
-            <th scope="col">Due Date </th>
-            <th scope="col">People in Charge </th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($requests as $request)
-          <tr>
-            <th scope="row" class="align-middle">{{ $loop->iteration }}</th>
-            <td class="align-middle">{{ $request->konten }}</td>
-            <td class="align-middle">{{ $request->status }}</td>
-            <td class="align-middle">{{ $request->deadline }}</td>
-            <td class="align-middle">
-              @if ($request->PICs->count() > 0)
-              @foreach ($request->PICs as $PIC)
-              <span class="badge badge-pill badge-primary">{{ $PIC->admin->name }}</span><br>
-              @endforeach
-              @else
-              <span class="badge badge-pill badge-danger">Not Assigned</span>
-              @endif
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
+
+<div class="row">
+  <div class="card col-md-4 p-4 bg-dark">
+    <h5 class="text-white">
+      Pending
+    </h5>
+    <hr class="bg-white">
+    @foreach ($pending_requests as $pending)
+    <div class="card bg-light">
+      <h5>
+        {{ $pending->konten }}
+      </h5>
+      <p>
+        {{ $pending->created_at }}
+      </p>
+      <a href="/adminboard/{{ $pending->id }}/edit" class="btn btn-primary">Edit</a>
+      <form action="/adminboard/{{ $pending->id }}" method="post" class="d-inline">
+        @method('delete')
+        @csrf
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+    <br>
+    @endforeach
+  </div>
+
+  <div class="card col-md-4 p-4 bg-dark">
+    <h5 class="text-white">
+      On Progress
+    </h5>
+    <hr class="bg-white">
+    @foreach ($onprogress_requests as $onprogress)
+    <div class="card bg-light">
+      <h5>
+        {{ $onprogress->konten }}
+      </h5>
+      <p>
+        {{ $onprogress->created_at }}
+      </p>
+      <a href="/adminboard/{{ $onprogress->id }}/edit" class="btn btn-primary">Edit</a>
+      <form action="/adminboard/{{ $onprogress->id }}" method="post" class="d-inline">
+        @method('delete')
+        @csrf
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+    <br>
+    @endforeach
+  </div>
+  
+  <div class="card col-md-4 p-4 bg-dark">
+    <h5 class="text-white">
+      Done
+    </h5>
+    <hr class="bg-white">
+    @foreach ($done_requests as $done)
+    <div class="card bg-light">
+      <h5>
+        {{ $done->konten }}
+      </h5>
+      <p>
+        {{ $done->created_at }}
+      </p>
+      <a href="/adminboard/{{ $done->id }}/edit" class="btn btn-primary">Edit</a>
+      <form action="/adminboard/{{ $done->id }}" method="post" class="d-inline">
+        @method('delete')
+        @csrf
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+    <br>
+    @endforeach
+  </div>
+
+</div>
+
+
+
+
+</div>
 @endsection

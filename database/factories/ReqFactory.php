@@ -21,7 +21,7 @@ class ReqFactory extends Factory
             'board_id' => $this->faker->numberBetween(1, 3),
             'konten' => $this->faker->sentence(mt_rand(3, 6)),
             'detail' => $this->faker->paragraph(mt_rand(3, 6)),
-            'status' => $this->faker->randomElement(['pending', 'on progress', 'done', 'rejected', 'revised']),
+            'status' => $this->faker->randomElement(['Pending', 'On Progress', 'Done']),
             'deadline' => $this->faker->dateTimeBetween('now', '+1 years'),
         ];
     }

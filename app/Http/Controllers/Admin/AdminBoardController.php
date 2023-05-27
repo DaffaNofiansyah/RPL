@@ -45,7 +45,11 @@ class AdminBoardController extends Controller
             [
                 'board' => $board,
                 // 'requests is all the requests that has the same board_id as the board we are viewing
-                'requests' => $board->reqs
+                // 'requests' => $board->reqs
+                'pending_requests' => $board->reqs->where('status', 'Pending'),
+                'onprogress_requests' => $board->reqs->where('status', 'On Progress'),
+                'done_requests' => $board->reqs->where('status', 'Done'),
+
             ]
         );
     }

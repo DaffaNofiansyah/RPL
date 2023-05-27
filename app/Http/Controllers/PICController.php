@@ -53,7 +53,7 @@ class PICController extends Controller
      */
     public function update(UpdatePICRequest $request, PIC $pIC)
     {
-        //
+        
     }
 
     /**

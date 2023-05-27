@@ -90,5 +90,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index']);
         Route::resource('/board', AdminBoardController::class);
         Route::resource('/req', AdminController::class);
+        Route::get('/req/{req}/take', [AdminController::class, 'take']);
     });
 });

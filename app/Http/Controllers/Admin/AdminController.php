@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Req;
 use App\Models\Board;
+use App\Models\PIC;
 
 class AdminController extends Controller
 {
@@ -61,8 +62,19 @@ class AdminController extends Controller
             'title' => 'User Request',
             'active' => 'userreq',
             'request' => $req,
-            'statuses' => ['Pending', 'Approved', 'Rejected']
+            'statuses' => ['Pending', 'On Progress', 'Done']
         ]);
+    }
+
+    public function take(Req $req)
+    {
+        $validatedData['req_id'] = $req->id;
+        $validatedData['admin_id'] = auth()->guard('admin')->user()->id;
+        PIC::create($validatedData);
+
+        Req::where('id', $req->id)->update(['status' => 'on progress']);
+
+        return redirect('/admin/req')->with('takereq_success', 'Request has been taken!');
     }
 
     /**
@@ -94,4 +106,6 @@ class AdminController extends Controller
         Req::destroy($req->id);
         return redirect('/admin/req')->with('delete_success', 'Request has been deleted!');
     }
+
+
 }
