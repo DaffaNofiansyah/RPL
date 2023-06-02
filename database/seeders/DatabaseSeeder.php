@@ -12,10 +12,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        \App\Models\Divisi::create(['name' => 'Kreatif']);
+        \App\Models\Divisi::create(['name' => 'Enkom']);
+        \App\Models\Divisi::create(['name' => 'Kestari']);
+        \App\Models\Divisi::create(['name' => 'Acara']);
+        
         \App\Models\Admin::factory(10)->create();
         \App\Models\Req::factory(10)->create();
         \App\Models\User::factory()->count(10)->create();
-        \App\Models\Divisi::factory(3)->create();
+        // \App\Models\Divisi::factory(3)->create();
         \App\Models\Board::factory(3)->create();
         \App\Models\PIC::factory(10)->create();
     }

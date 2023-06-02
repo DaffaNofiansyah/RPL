@@ -52,10 +52,14 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-
     public function PICs()
     {
         return $this->hasMany(PIC::class);
+    }
+
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class);
     }
 }
 ?>

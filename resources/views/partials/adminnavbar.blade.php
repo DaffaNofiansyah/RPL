@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-lg navbar-light border-bottom shadow-sm py-3">
     <div class="container">
       <a class="navbar-brand" href="/admin/dashboard"><i class="bi bi-columns-gap"></i></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +25,8 @@
             Welcome back, {{ auth('admin')->user()->name }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/admin/profile"><i class="bi bi-person"></i> Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/admin/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>

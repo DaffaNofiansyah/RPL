@@ -2,6 +2,7 @@
 
 @section('container')
 
+
 <link rel="stylesheet" href="{{ asset('css/editbutton.css') }}">
 <link rel="stylesheet" href="{{ asset('css/deletebutton.css') }}">
 
@@ -44,6 +45,9 @@
       </thead>
       <tbody>
         @foreach ($requests as $request)
+          @php
+            $isPIC = false;
+          @endphp
         <tr class="align-middle">
           <th scope="row" class="align-middle">{{ $loop->iteration }}</th>
           <td class="align-middle">{{ $request->konten }}</td>
@@ -52,17 +56,26 @@
           <td class="align-middle">
             @if ($request->PICs->count() > 0)
               @foreach ($request->PICs as $PIC)
+                @if ($PIC->admin->id == auth('admin')->user()->id)
+                  @php
+                    $isPIC = true;
+                  @endphp
+                @endif
                 <span class="badge badge-pill badge-primary">{{ $PIC->admin->name }}</span><br>
               @endforeach
               @else
                 <span class="badge badge-pill badge-danger">Not Assigned</span>
             @endif
           </td>
-          <td class="align-middle">
+
+            @if ($isPIC == true)
+            <td class="align-middle">
             <button class="cssbuttons-io" onclick="window.location.href='/admin/req/{{ $request->id }}/take'">
               <span>Take</span>
             </button>
           </td>
+            @endif  
+
           <td class="align-middle">
             <button class="cssbuttons-io" onclick="window.location.href='/admin/req/{{ $request->id }}/edit'">
               <span>Edit</span>

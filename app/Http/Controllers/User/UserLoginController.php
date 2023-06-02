@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class UserLoginController extends Controller
 {
@@ -24,6 +26,25 @@ class UserLoginController extends Controller
             'title' => 'User Register',
             'active' => 'userregister'
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:3|max:50',
+            'username' => 'required|min:3|max:50|unique:users',
+            'email' => 'required|email:dns|unique:users',
+            'password' => 'required|min:5|max:50'
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email, 
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect('/user/login')->with('success', 'Register successfull!');
     }
 
     public function authenticate(Request $request)

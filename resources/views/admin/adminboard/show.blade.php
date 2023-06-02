@@ -4,7 +4,7 @@
 @section('container')
 
 <div class="row">
-  <div class="card col-md-4 p-4 bg-dark">
+  <div class="card col-md-4 p-4 shadow rounded">
     <h5 class="text-white">
       Pending
     </h5>
@@ -28,7 +28,7 @@
     @endforeach
   </div>
 
-  <div class="card col-md-4 p-4 bg-dark">
+  <div class="card col-md-4 p-4">
     <h5 class="text-white">
       On Progress
     </h5>
@@ -52,7 +52,7 @@
     @endforeach
   </div>
   
-  <div class="card col-md-4 p-4 bg-dark">
+  <div class="card col-md-4 p-4">
     <h5 class="text-white">
       Done
     </h5>

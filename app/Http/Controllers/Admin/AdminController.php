@@ -28,6 +28,31 @@ class AdminController extends Controller
         ]);
     }
 
+    public function profile()
+    {
+        return view('admin.adminprofile.index',
+        [
+            'title' => 'Profile',
+            'active' => 'profile',
+            'admin' => auth()->guard('admin')->user()
+        ]);
+    }
+
+    public function updatephoto(Request $request, Admin $admin)
+    {
+        $validatedData = $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $validatedData['photo'] = $request->file('photo')->store('uploads', 'public');
+
+        // update corresponding admins photo attribute
+        Admin::where('id', $admin->id)->update($validatedData);
+
+        return redirect('/admin/profile')->with('editphoto_success', 'Photo has been edited!');
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -106,6 +131,5 @@ class AdminController extends Controller
         Req::destroy($req->id);
         return redirect('/admin/req')->with('delete_success', 'Request has been deleted!');
     }
-
 
 }

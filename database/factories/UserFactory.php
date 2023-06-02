@@ -19,7 +19,7 @@ class UserFactory extends Factory
     {
         $domain = 'gmail.com';
         return [
-            'divisi_id' => fake()->numberBetween(1, 3), // '1' => 'IT', '2' => 'HRD', '3' => 'Marketing
+            'divisi_id' => fake()->numberBetween(2, 4),
             'name' => fake()->name(),
             'username' => fake()->unique()->userName(),
             'phone' => fake()->unique()->phoneNumber(),

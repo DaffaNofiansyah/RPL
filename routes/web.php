@@ -40,6 +40,10 @@ Route::get('/home', function () {
     return view('home.index');
 })->middleware('guest')->name('login');
 
+// Route::get('/', function () {
+//     return view('admin.adminprofile.index');
+// })->middleware('guest')->name('login');
+
 
 //USER
 //userlogin
@@ -65,6 +69,7 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('/login', [UserLoginController::class, 'login'])->name('login');
         Route::post('/login', [UserLoginController::class, 'authenticate']);
         Route::get('/register', [UserLoginController::class, 'register']);
+        Route::post('/register', [UserLoginController::class, 'store']);
     });
 
 
@@ -87,9 +92,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     
     Route::middleware('auth:admin')->group(function () {
         Route::post('/logout', [AdminLoginController::class, 'logout']);
+        Route::get('/profile', [AdminController::class, 'profile']);
+        Route::post('/profile/{admin}/updatephoto', [AdminController::class, 'updatephoto']);
         Route::get('/dashboard', [AdminDashboardController::class, 'index']);
         Route::resource('/board', AdminBoardController::class);
         Route::resource('/req', AdminController::class);
         Route::get('/req/{req}/take', [AdminController::class, 'take']);
+        Route::get('/req/{req}/reject', [AdminController::class, 'reject']);
     });
 });
