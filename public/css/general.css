@@ -1,0 +1,11 @@
+.roundit
+{
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.borded-bottom
+{
+    border-bottom: 1px solid #000000;
+    width: 200px;
+}

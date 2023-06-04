@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 
 return new class extends Migration
 {
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->string('konten');
             $table->text('detail');
             $table->string('status');
-            $table->date('deadline');
+            $table->date('deadline')->format('M d, Y');
             $table->timestamps();
         });
     }

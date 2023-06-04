@@ -25,7 +25,7 @@ class AdminBoardController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.adminboard.create');
     }
 
     /**
@@ -33,7 +33,14 @@ class AdminBoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+        ]);
+        $validatedData['created_at'] = now();
+
+        Board::create($validatedData);
+
+        return redirect('/admin/board')->with('create_success', 'Board has been created!');
     }
 
     /**

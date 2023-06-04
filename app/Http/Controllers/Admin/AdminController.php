@@ -53,6 +53,17 @@ class AdminController extends Controller
         
     }
 
+    public function detail(Req $req)
+    {
+        return view('admin.adminboard.detail',
+        [
+            'title' => 'User Request',
+            'active' => 'userreq',
+            'request' => $req,
+            'statuses' => ['Pending', 'On Progress', 'Done']
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -2,84 +2,80 @@
 
 
 @section('container')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/adminboard.css') }}">
+{{-- make an array of statuses --}}
+<?php
+  $statuses = array('Pending', 'On Progress', 'Done');
+?>
 
-<div class="row">
-  <div class="card col-md-4 p-4 shadow rounded">
-    <h5 class="text-white">
-      Pending
-    </h5>
-    <hr class="bg-white">
+<div class="board">
+  <div class="column">
+    <h2 class="column-header">To Do</h2>
     @foreach ($pending_requests as $pending)
-    <div class="card bg-light">
-      <h5>
-        {{ $pending->konten }}
-      </h5>
-      <p>
-        {{ $pending->created_at }}
-      </p>
-      <a href="/adminboard/{{ $pending->id }}/edit" class="btn btn-primary">Edit</a>
-      <form action="/adminboard/{{ $pending->id }}" method="post" class="d-inline">
-        @method('delete')
-        @csrf
-        <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
+    <div id="todo" class="column-content">
+      <a href="/admin/req/{{ $pending->id }}/detail" class="text-decoration-none hovered">
+        <h5 class="text-dark">
+          {{ $pending->konten }}
+        </h5>
+      </a>
+      @if ($pending->PICs->count() > 0)
+        <div class="d-inline float-right">
+          @foreach ($pending->PICs as $PIC)
+              <img src="{{ asset($PIC->admin->photo) }}" alt="" class="rounded-circle" width="30">
+          @endforeach
+        </div>
+      @else
+        <p>
+          No PICs
+        </p>
+      @endif
     </div>
-    <br>
     @endforeach
   </div>
 
-  <div class="card col-md-4 p-4">
-    <h5 class="text-white">
-      On Progress
-    </h5>
-    <hr class="bg-white">
+  <div class="column">
+    <h2 class="column-header">In Progress</h2>
     @foreach ($onprogress_requests as $onprogress)
-    <div class="card bg-light">
-      <h5>
-        {{ $onprogress->konten }}
-      </h5>
-      <p>
-        {{ $onprogress->created_at }}
-      </p>
-      <a href="/adminboard/{{ $onprogress->id }}/edit" class="btn btn-primary">Edit</a>
-      <form action="/adminboard/{{ $onprogress->id }}" method="post" class="d-inline">
-        @method('delete')
-        @csrf
-        <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
+    <div id="todo" class="column-content">
+      <a href="/admin/req/{{ $onprogress->id }}/detail" class="text-decoration-none hovered">
+        <h5 class="text-dark">
+          {{ $onprogress->konten }}
+        </h5>
+      </a>
+      @if ($onprogress->PICs->count() > 0)
+        <div class="d-inline float-right">
+          @foreach ($onprogress->PICs as $PIC)
+              <img src="{{ asset($PIC->admin->photo) }}" alt="" class="rounded-circle" width="30">
+          @endforeach
+        </div>
+      @else
+        <p>
+          No PICs
+        </p>
+      @endif
     </div>
-    <br>
     @endforeach
   </div>
-  
-  <div class="card col-md-4 p-4">
-    <h5 class="text-white">
-      Done
-    </h5>
-    <hr class="bg-white">
+
+  <div class="column">
+    <h2 class="column-header">Done</h2>
     @foreach ($done_requests as $done)
-    <div class="card bg-light">
-      <h5>
-        {{ $done->konten }}
-      </h5>
-      <p>
-        {{ $done->created_at }}
-      </p>
-      <a href="/adminboard/{{ $done->id }}/edit" class="btn btn-primary">Edit</a>
-      <form action="/adminboard/{{ $done->id }}" method="post" class="d-inline">
-        @method('delete')
-        @csrf
-        <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
+    <div id="done" class="column-content">
+        <h5>
+          {{ $done->konten }}
+        </h5>
+        <p>
+          {{ date('M d, Y', strtotime($done->deadline)) }}
+        </p>
+        <a href="/adminboard/{{ $done->id }}/edit" class="btn btn-primary">Edit</a>
+        <form action="/adminboard/{{ $done->id }}" method="post" class="d-inline">
+          @method('delete')
+          @csrf
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      <br>
     </div>
-    <br>
     @endforeach
   </div>
-
-</div>
-
-
-
-
 </div>
 @endsection

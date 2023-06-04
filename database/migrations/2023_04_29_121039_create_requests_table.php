@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('konten');
             $table->text('detail');
             $table->string('status');
-            $table->date('deadline');
+            $table->date('deadline')->format('M d, Y');
             $table->timestamps();
         });
     }

@@ -99,5 +99,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/req', AdminController::class);
         Route::get('/req/{req}/take', [AdminController::class, 'take']);
         Route::get('/req/{req}/reject', [AdminController::class, 'reject']);
+        Route::get('/req/{req}/complete', [AdminController::class, 'complete']);
+        Route::get('/req/{req}/detail', [AdminController::class, 'detail']);
+        Route::get('/board/create', [AdminBoardController::class, 'create']);
     });
 });
