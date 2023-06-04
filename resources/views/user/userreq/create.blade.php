@@ -2,7 +2,7 @@
 
 @section('container')
 
-<h1 class="mb-3">Make a Request</h1>
+<h2 class="mb-2 text-center">Make a Request</h2>
 <form action="/user/req" method="post">
     {{-- hidden status waiting for approval --}}
     {{-- hidden user_id --}}

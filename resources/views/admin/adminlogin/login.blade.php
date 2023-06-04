@@ -3,7 +3,6 @@
 @section('container')
 <link rel="stylesheet" href="{{ asset('css/registerlogin.css') }}">
 
-
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -19,7 +18,7 @@
 
           @if(session()->has('loginError'))
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Login gagal!</strong> tolong periksa kembali email dan password anda.
+            <strong>Login gagal!</strong> Tolong periksa kembali email dan password anda.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -30,7 +29,7 @@
           {{-- <div class="card shadow-2-strong" style="border-radius: 1rem;">
             <div class="card-body p-5">
    --}}
-              <h1 class="mb-5 text-center">Login as Admin</h1>
+              <h1 class="mb-4 text-center" style="font-weight:bold;">Login as Admin</h1>
   
               <form action="/admin/login" method="post">
                 @csrf
