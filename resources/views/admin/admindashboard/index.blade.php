@@ -2,9 +2,9 @@
 
 
 @section('container')
-<h2 class="text-center mb-4">
+<!-- <h2 class="text-center mb-4">
   Welcome
-</h2>
+</h2> -->
 
 <div class="row justify-content-center">
   <div class="col-md-4">

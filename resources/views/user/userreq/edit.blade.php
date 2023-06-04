@@ -2,7 +2,7 @@
 
 @section('container')
 
-<h1 class="mb-3">Edit</h1>
+<h1 class="mb-3 text-center">Edit Request</h1>
 <form action="/user/req/{{ $request->id }}" method="post">
     {{-- hidden status waiting for approval --}}
     {{-- hidden user_id --}}
@@ -37,7 +37,7 @@
       <input type="date" class="form-control" id="deadline" name="deadline" required value="{{ old('deadline', $request->deadline) }}">
     </div>
 
-    <button type="submit" class="btn btn-primary">Edit</button>
+    <button type="submit" class="btn btn-primary mb-4" >Edit</button>
   </form>
 @endsection
 

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-lg navbar-light bg-gradient" style="border-bottom: 1px solid #A6A5AD;">
     <div class="container">
       <a class="navbar-brand" href="/admin/dashboard"><i class="bi bi-columns-gap"></i></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
