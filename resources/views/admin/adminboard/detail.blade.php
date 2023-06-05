@@ -4,17 +4,20 @@
 @section('container')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/general.css') }}">
 
+<h1 class="mb-2 text-center">Request Detail</h1>
+<hr class="mb-4 w-50">
+
 <div class="card p-4 roundit">
-  <h3 class="card-title pb-2 borded-bottom">Request Detail</h3>
 
     <h5 class="card-title">Requester: {{ $request->user->name }}</h5>
     <p class="card-text">Request: {{ $request->konten }}</p>
+    <p class="card-text mb-0">Deskripsi:</p>
     <p class="card-text">{{ $request->detail }}</p>
     <p class="card-text">Deadline: {{ date('M d, Y', strtotime($request->deadline)) }}</p>
     <p class="card-text">Status: {{ $request->status }}</p>
     @if ($request->PICs->count() > 0)
     <p class="mb-0">PICs:</p>
-    <div class="mb-5">
+    <div class="mb-4">
         @foreach ($request->PICs as $PIC)
           <p class="mb-0">{{ $PIC->admin->name }}</p>
         @endforeach
@@ -24,11 +27,23 @@
         No PICs
     </p>
     @endif
-    <a href="/admin/req/{{ $request->id }}/edit" class="btn btn-primary borded-bottom mb-2">Edit</a>
+    {{-- notes --}}
+    <p class="card-text mb-0">Notes:</p>
+    @if ($request->notes)
+    <p class="card-text">{{ $request->notes }}</p>
+    @endif
+    <br>
+
+    @if (!$request->PICs->contains('admin_id', auth()->user()->id))
+      <a href="/admin/req/{{ $request->id }}/take" class="btn btn-primary borded-bottom mb-2">Take Request</a>
+    @else
+      <a href="/admin/req/{{ $request->id }}/edit" class="btn btn-primary borded-bottom mb-2">Edit Request</a>
+    @endif
+
     <form action="/admin/req/{{ $request->id }}" method="post" class="d-inline">
         @method('delete')
         @csrf
-        <button type="submit" class="btn btn-danger borded-bottom">Delete</button>
+        <button type="submit" class="btn btn-danger borded-bottom">Delete Request</button>
     </form>
 </div>
 @endsection

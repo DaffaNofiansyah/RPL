@@ -26,7 +26,7 @@
         <div class="row py-lg-5">
           <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">Welcome</h1>
-            <p class="lead text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque doloremque quis molestiae tenetur asperiores similique quibusdam dignissimos nulla possimus. Accusamus, expedita? Sequi unde adipisci debitis quos, laudantium similique aliquid porro!</p>
+            <p class="lead text-muted">Welcome to BabuToday! Please login as user or admin</p>
             <p>
               <a href="/user/login" class="btn btn-white my-2 border-dark">Login as User</a>
               <a href="/admin/login" class="btn btn-dark my-2">Login as Admin</a>

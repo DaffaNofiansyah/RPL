@@ -49,8 +49,7 @@ class AdminController extends Controller
         // update corresponding admins photo attribute
         Admin::where('id', $admin->id)->update($validatedData);
 
-        return redirect('/admin/profile')->with('editphoto_success', 'Photo has been edited!');
-        
+        return redirect('/admin/profile')->with('editphoto_success', 'Photo has been edited!'); 
     }
 
     public function detail(Req $req)
@@ -108,9 +107,9 @@ class AdminController extends Controller
         $validatedData['admin_id'] = auth()->guard('admin')->user()->id;
         PIC::create($validatedData);
 
-        Req::where('id', $req->id)->update(['status' => 'on progress']);
+        Req::where('id', $req->id)->update(['status' => 'On Progress']);
 
-        return redirect('/admin/req')->with('takereq_success', 'Request has been taken!');
+        return redirect('/admin/req/' . $req->id . '/detail')->with('takereq_success', 'Request has been taken!');
     }
 
     /**
@@ -120,6 +119,7 @@ class AdminController extends Controller
     {
         $validatedData = $request->validate([
             'status' => 'required',
+            'notes' => 'nullable'
         ]);
 
         $validatedData['user_id'] = $req->user_id;
@@ -131,7 +131,7 @@ class AdminController extends Controller
 
         Req::where('id', $req->id)->update($validatedData);
 
-        return redirect('/admin/req')->with('editreq_success', 'Request has been edited!');
+        return redirect('/admin/board/' . $req->board_id)->with('editreq_success', 'Request has been edited!');
     }
 
     /**
@@ -140,7 +140,7 @@ class AdminController extends Controller
     public function destroy(Req $req)
     {
         Req::destroy($req->id);
-        return redirect('/admin/req')->with('delete_success', 'Request has been deleted!');
+        return redirect('/admin/board/' . $req->board_id)->with('deletereq_success', 'Request has been deleted!');
     }
 
 }

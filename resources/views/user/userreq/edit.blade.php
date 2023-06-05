@@ -1,8 +1,15 @@
 @extends('layouts.usermain')
 
 @section('container')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/general.css') }}">
 
-<h1 class="mb-3 text-center">Edit Request</h1>
+<div>
+  <h1 class="mb-3 text-center">Edit Request</h1>
+  <hr class="mb-4 w-50">
+</div>
+
+
+<div class="card p-4 roundit">
 <form action="/user/req/{{ $request->id }}" method="post">
     {{-- hidden status waiting for approval --}}
     {{-- hidden user_id --}}
@@ -12,19 +19,6 @@
     <div class="mb-3">
       <label for="konten" class="form-label">Konten</label>
         <input type="text" class="form-control" id="konten" name="konten" autofocus required value="{{ old('konten', $request->konten) }}">
-    </div>
-
-    <div class="mb-3">
-      <label for="board_id" class="form-label">Board</label>
-      <select class="form-control" name="board_id" id="board_id">
-        @foreach ($boards as $board)
-          @if ( $board->id == old('board_id', $request->board_id) )
-            <option value="{{ $board->id }}" selected>{{ $board->name }}</option>
-          @else
-            <option value="{{ $board->id }}">{{ $board->name }}</option>
-          @endif
-        @endforeach
-      </select>
     </div>
 
     <div class="mb-3">
@@ -39,5 +33,6 @@
 
     <button type="submit" class="btn btn-primary mb-4" >Edit</button>
   </form>
+</div>
 @endsection
 

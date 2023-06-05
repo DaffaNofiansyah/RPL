@@ -24,6 +24,29 @@ class UserController extends Controller
         ]);
     }
 
+    public function profile()
+    {
+        return view('user.userprofile.index',
+        [
+            'title' => 'Profile',
+            'active' => 'profile',
+            'user' => auth()->user()
+        ]);
+    }
+
+    public function updatephoto(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $validatedData['photo'] = $request->file('photo')->store('uploads', 'public');
+
+        // update corresponding admins photo attribute
+        User::where('id', $user->id)->update($validatedData);
+
+        return redirect('/user/profile')->with('editphoto_success', 'Photo has been edited!');
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -50,9 +73,10 @@ class UserController extends Controller
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['status'] = 'pending';
+        $validatedData['status'] = 'Pending';
         Req::create($validatedData);
-        return redirect('/user/req')->with('newreq_success', 'New request has been added!');
+        //RETURN TO DETAIL PAGE
+        return redirect('/user/board/' . $validatedData['board_id'])->with('create_success', 'Request has been created!');
     }
 
     /**
@@ -84,16 +108,14 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'konten' => 'required',
-            'board_id' => 'required',
             'detail' => 'required',
             'deadline' => 'required'
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['status'] = 'pending';
         Req::where('id', $req->id)->update($validatedData);
 
-        return redirect('/user/req')->with('editreq_success', 'Request has been edited!');
+        return redirect('/user/req/' . $req->id . '/detail')->with('editreq_success', 'Request has been edited!');
     }
 
     /**
@@ -102,6 +124,17 @@ class UserController extends Controller
     public function destroy(Req $req)
     {
         Req::destroy($req->id);
-        return redirect('/user/req')->with('delete_success', 'Request has been deleted!');
+        return redirect('/user/board/' . $req->board_id)->with('deletereq_success', 'Request has been deleted!');
+    }
+
+    public function detail(Req $req)
+    {
+        return view('user.userboard.detail',
+        [
+            'title' => 'User Request',
+            'active' => 'userreq',
+            'request' => $req,
+            'statuses' => ['Pending', 'On Progress', 'Done']
+        ]);
     }
 }

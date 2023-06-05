@@ -19,7 +19,7 @@ body
     /* left: 50%; */
     /* transform: translate(-50%,-50%); */
     margin: 0 auto;
-    width : 450px;
+    width : 750px;
     display: flex;
     box-shadow: 0 1px 5px 0 rgba(69,90,100,0.8);
 }
@@ -85,7 +85,7 @@ body
 .wrapper .right .info_data .data h4,
 .wrapper .right .requests_data .data h4
 {
-    font-size: 15px;
+    font-size: 20px;
     color: #353c4e;
     margin-bottom: 5px;
 }
@@ -93,7 +93,7 @@ body
 .wrapper .right .info_data .data p,
 .wrapper .right .requests_data .data p
 {
-    font-size: 13px;
+    font-size: 16px;
     margin-bottom: 10px;
     color: #919aa3;
 }

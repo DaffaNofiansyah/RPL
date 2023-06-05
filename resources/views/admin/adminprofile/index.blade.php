@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="{{ asset('css/adminprofile.css') }}">
 
 <div class="wrapper">
-    <div class="left">
+    <div class="left" style="background-color: #485461;
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);">
         {{-- get image from uploads folder inside public --}}
         <img src="{{ asset(auth('admin')->user()->photo) }}" alt="user" width="100">
         {{-- get admin name --}
@@ -14,7 +15,7 @@
         {{-- get admin name --}
         {{-- get admin name --}}
         <h4>{{ auth('admin')->user()->name }}</h4>
-        <p>{{ auth('admin')->user()->divisi->name }}</p>
+        <hr style="background-color: white;">
         {{-- update images --}}
         {{-- <a href="admin/profile/updatephoto" class="btn">Update Photo</a> --}}
         <form action="profile/{{ auth('admin')->user()->id }}/updatephoto" method="post" enctype="multipart/form-data">
@@ -51,23 +52,9 @@
                     <h4>Phone</h4>
                     <p>{{ auth('admin')->user()->phone }}</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="requests">
-            <h3>Requests</h3>
-            <div class="requests_data">
                 <div class="data">
-                    <h4>Pending</h4>
-                    <p>5</p>
-                </div>
-                <div class="data">
-                    <h4>On progress</h4>
-                    <p>5</p>
-                </div>
-                <div class="data">
-                    <h4>Completed</h4>
-                    <p>5</p>
+                    <h4>Divisi</h4>
+                    <p>{{ auth('admin')->user()->divisi->name }}</p>
                 </div>
             </div>
         </div>

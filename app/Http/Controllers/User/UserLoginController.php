@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Divisi;
 
 class UserLoginController extends Controller
 {
@@ -24,7 +25,8 @@ class UserLoginController extends Controller
         return view('user.userlogin.register',
         [
             'title' => 'User Register',
-            'active' => 'userregister'
+            'active' => 'userregister',
+            'divisi' => Divisi::all()
         ]);
     }
 
@@ -33,6 +35,8 @@ class UserLoginController extends Controller
         $request->validate([
             'name' => 'required|min:3|max:50',
             'username' => 'required|min:3|max:50|unique:users',
+            'divisi_id' => 'required',
+            'phone' => 'required',
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:5|max:50'
         ]);
@@ -40,6 +44,8 @@ class UserLoginController extends Controller
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
+            'divisi_id' => $request->divisi_id,
+            'phone' => $request->phone,
             'email' => $request->email, 
             'password' => Hash::make($request->password)
         ]);
@@ -54,13 +60,15 @@ class UserLoginController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials))
-        {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/user/dashboard')->with('success', 'Login successfull!');
-        }
 
-        return back()->with('loginError', 'Login failed! Please check your credentials!');
+            return redirect()->intended('/user/board')->with('login_success', 'Login successfull!');
+        }
+        else 
+        {
+            return back()->with('loginError', 'Login failed! Please check your credentials!');
+        }
     }
 
     public function logout(Request $request)

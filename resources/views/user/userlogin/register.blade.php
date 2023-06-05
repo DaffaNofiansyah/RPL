@@ -12,18 +12,36 @@
             {{-- name --}}
             <div class="form-outline mb-4">
               <!-- <input type="text" name="name" id="name" class="form-control form-control-lg" placeholder="Name" required /> -->
-              <label for="email" class="form-label text-end">Name*</label>
-              <input type="email" name="email" id="email" class="form-control form-control-lg rounded-pill" placeholder="Enter your name" required />
+              <label for="name" class="form-label text-end">Name*</label>
+              <input type="text" name="name" id="name" class="form-control form-control-lg rounded-pill" placeholder="Enter your name" required />
             </div>
 
             {{-- username --}}
             <div class="form-outline mb-4">
               <!-- <input type="text" name="username" id="username" class="form-control form-control-lg" placeholder="Username" required /> -->
-              <label for="email" class="form-label text-end">Username*</label>
-              <input type="email" name="email" id="email" class="form-control form-control-lg rounded-pill" placeholder="Enter username" required />
-              
+              <label for="username" class="form-label text-end">Username*</label>
+              <input type="text" name="username" id="username" class="form-control form-control-lg rounded-pill" placeholder="Enter username" required />
             </div>
               
+            {{-- divisi --}}
+
+
+            <div class="mb-3">
+              <label for="divisi_id" class="form-label">Divisi*</label>
+              <select class="form-control form-control-lg rounded-pill" name="divisi_id" id="divisi_id">
+                @foreach ($divisi as $div)
+                <option value="{{ $div->id }}">{{ $div->name }}</option>
+                @endforeach
+              </select>
+            </div>
+
+            {{-- phone --}}
+            <div class="form-outline mb-4">
+              <!-- <input type="text" name="username" id="username" class="form-control form-control-lg" placeholder="Username" required /> -->
+              <label for="phone" class="form-label text-end">Phone Number*</label>
+              <input type="text" name="phone" id="phone" class="form-control form-control-lg rounded-pill" placeholder="Enter phone number" required />
+            </div>
+
               {{-- email --}}
             <div class="form-outline mb-4">
               <!-- <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="Email" required /> -->

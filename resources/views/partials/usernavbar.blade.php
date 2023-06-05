@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-gradient" style="border-bottom: 1px solid #A6A5AD;">
     <div class="container">
-      <a class="navbar-brand" href="/user/dashboard"><i class="bi bi-columns-gap"></i></a>
+      <a class="navbar-brand" href="/user/board" style="color: #000000; font-weight: bold;">BabuToday</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      {{-- <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="/user/dashboard">Dashboard</a>
         </li>
@@ -15,7 +15,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/user/req">Request</a>
         </li>
-      </ul>
+      </ul> --}}
 
       <ul class="navbar-nav ml-auto">
       @auth 
@@ -25,7 +25,9 @@
             Welcome back, {{ auth()->user()->name }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/user/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            <li><a class="dropdown-item" href="/user/profile"><i class="bi bi-person"></i> Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/user/board"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>
               <form action="/user/logout" method="post">

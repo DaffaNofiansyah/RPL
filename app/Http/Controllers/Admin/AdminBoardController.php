@@ -84,4 +84,10 @@ class AdminBoardController extends Controller
     {
         //
     }
+
+    public function delete(Board $board)
+    {
+        $board->delete();
+        return redirect('/admin/board')->with('delete_success', 'Board has been deleted!');
+    }
 }

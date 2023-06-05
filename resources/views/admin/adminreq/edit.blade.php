@@ -2,7 +2,9 @@
 
 @section('container')
 
-<h1 class="mb-3">Edit</h1>
+<h1 class="mb-2 text-center">Edit Request</h1>
+<hr class="mb-4 w-50">
+
 <form action="/admin/req/{{ $request->id }}" method="post">
     {{-- hidden status waiting for approval --}}
     {{-- hidden user_id --}}
@@ -20,6 +22,12 @@
           @endif
         @endforeach
       </select>
+    </div>
+
+    {{-- notes --}}
+    <div class="mb-3">
+      <label for="notes" class="form-label">Notes</label>
+      <textarea class="form-control" name="notes" id="notes" rows="3">{{ old('notes', $request->notes) }}</textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Edit</button>

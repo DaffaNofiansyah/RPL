@@ -38,7 +38,7 @@ class AdminLoginController extends Controller
         if (Auth::guard('admin')->attempt($credentials))
         {
             $request->session()->regenerate();
-            return redirect()->intended('/admin/dashboard')->with('success', 'Login successfull!');
+            return redirect()->intended('/admin/board')->with('success', 'Login successfull!');
         }
         return back()->with('loginError', 'Login failed! Please check your credentials!');
     }

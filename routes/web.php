@@ -78,6 +78,10 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index']);
         Route::resource('/board', UserBoardController::class);
         Route::resource('/req', UserController::class);
+        // Route::get('/req/{req}/create', [UserController::class, 'create']);
+        Route::get('/req/{req}/detail', [UserController::class, 'detail']);
+        Route::get('/profile', [UserController::class, 'profile']);
+        Route::post('/profile/{user}/updatephoto', [UserController::class, 'updatephoto']);
     });
 });
 
@@ -102,5 +106,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/req/{req}/complete', [AdminController::class, 'complete']);
         Route::get('/req/{req}/detail', [AdminController::class, 'detail']);
         Route::get('/board/create', [AdminBoardController::class, 'create']);
+        Route::post('/board/{board}/delete', [AdminBoardController::class, 'delete']);
     });
 });

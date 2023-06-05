@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('detail');
             $table->string('status');
             $table->date('deadline')->format('M d, Y');
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

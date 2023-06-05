@@ -1,8 +1,12 @@
 @extends('layouts.usermain')
 
 @section('container')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/general.css') }}">
 
-<h2 class="mb-2 text-center">Make a Request</h2>
+<h1 class="mb-2 text-center">Create New Request</h1>
+<hr class="mb-4 w-50">
+
+<div class="card p-4 roundit">
 <form action="/user/req" method="post">
     {{-- hidden status waiting for approval --}}
     {{-- hidden user_id --}}
@@ -37,7 +41,8 @@
       <input type="date" class="form-control" id="deadline" name="deadline" required value="{{ old('deadline') }}">
     </div>
 
-    <button type="submit" class="btn btn-primary">Create Post</button>
+    <button type="submit" class="btn btn-primary">Create Request</button>
   </form>
+</div>
 @endsection
 
